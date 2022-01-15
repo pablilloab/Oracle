@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiro al Blanco</title>
+</head>
+<body>
+    <canvas width="600" heigth="400"></canvas>
+
+    <script>
+        let pantalla = document.querySelector("canvas");
+        let pincel = pantalla.getContext("2d");
+
+        pincel.fillStyle = "lightgrey";
+        pincel.fillRect (0,0,600,400);
+
+        let radio = 10;
+
+        function dibujarCirculo (x,y,radio,color) {
+            pincel.fillStyle =color;
+            pincel.beginPath();
+            pincel.arc(x,y,radio,0,2*Math.PI);
+            pincel.fill();
+
+        }
+
+        function limpiarPantalla () {
+            pincel.clearRect(0,0,600,400);
+            pincel.fillStyle = "lightgrey";
+            pincel.fillRect (0,0,600,400);
+
+        }
+
+        function dibujarBlanco (x, y) {
+            dibujarCirculo(x,y,radio + 20,"red");
+            dibujarCirculo(x,y,radio + 10,"white");
+            dibujarCirculo(x,y,radio,"red");
+            
+            
+        }
+
+        let xAleatorio;
+        let yAleatorio;
+
+        function calculoAleatorios (maximo) {
+            return Math.floor(Math.random()*maximo);
+           
+        }
+
+        function actualizarPantalla () {
+            limpiarPantalla();            
+            xAleatorio = calculoAleatorios(600);
+            yAleatorio = calculoAleatorios(400);
+            dibujarBlanco(xAleatorio,yAleatorio);
+
+           
+            
+        }
+
+        function verificarDisparo (evento) {
+            let xdisparo = evento.pageX - pantalla.offsetLeft;
+            let ydisparo = evento.pageY - pantalla.offsetTop;
+            
+            if ((xdisparo < xAleatorio + radio) && (xdisparo > xAleatorio - radio) && (ydisparo < yAleatorio + radio) && (ydisparo > yAleatorio - radio)) {
+                alert("Robin Hood");
+
+            }
+        }
+        
+
+        setInterval(actualizarPantalla,1000);
+
+        pantalla.onclick = verificarDisparo;
+
+
+
+        
+
+
+        
+
+
+
+    </script>
+    
+</body>
+</html>

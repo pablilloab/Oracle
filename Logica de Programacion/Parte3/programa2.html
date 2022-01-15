@@ -1,0 +1,25 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    function dibujarCuadrado (x,y,color) {
+        let pizarra = document.querySelector("canvas");
+        let pincel = pizarra.getContext("2d");
+        pincel.fillStyle = color;
+        pincel.fillRect(x,y,50,50);
+        pincel.strokeStyle ="black";
+        pincel.strokeRect(x,y,50,50);
+    }
+
+    let x = 0;
+    
+    while (x < 600){
+        dibujarCuadrado(x,0,"green");
+        dibujarCuadrado(x,50,"red");
+        dibujarCuadrado(x,100,"yellow");
+        x = x + 50;
+
+    }
+
+
+
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujando Circulos</title>
+</head>
+<body>
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+
+        let pantalla = document.querySelector("canvas");
+        let lapiz = pantalla.getContext("2d");
+
+        lapiz.fillStyle = "grey";
+        lapiz.fillRect(0,0,600,400);
+
+        let colores = ["blue", "red", "green"];
+        let colorActual = 0;
+
+        function dibujarCirculo (evento) {
+            let x = evento.pageX - pantalla.offsetLeft;
+            let y = evento.pageY - pantalla.offsetTop;
+
+            lapiz.fillStyle = colores[colorActual];
+            lapiz.beginPath();
+            lapiz.arc (x,y,25,0,2*3.14);
+            lapiz.fill();
+            console.log(x + y);
+
+        }
+
+        function cambiarColor () {
+            colorActual++;
+            if (colorActual >= 3) {
+                colorActual = 0;
+            }
+
+        }
+
+
+
+
+        pantalla.onclick = dibujarCirculo;
+        pantalla.oncontextmenu = cambiarColor;
+
+    </script>
+    
+</body>
+</html>
